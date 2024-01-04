@@ -1,3 +1,4 @@
+import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
 
 class MyPage extends StatefulWidget {
@@ -9,10 +10,7 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('欢迎来到这儿'),
-      ),
+      appBar: AppBarBuilder.build(context, '嘎嘎叫'),
       body: Center(
         child: Text(
           '早起的年轻人',

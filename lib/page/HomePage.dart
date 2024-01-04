@@ -1,3 +1,5 @@
+import 'package:bazi/common/extention/extention_theme.dart';
+import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,14 +11,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('娃卡卡'),
-      ),
+      appBar: AppBarBuilder.build(context, '我是首页标题'),
       body: Center(
         child: Text(
           '狗一样的',
-          style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+          style: Theme.of(context).bodyStyle,
         ),
       ),
     );
