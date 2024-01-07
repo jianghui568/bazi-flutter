@@ -10,10 +10,10 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.build(context, '嘎嘎叫'),
+      appBar: AppBarBuilder.build(context, '我的页面标题'),
       body: Center(
         child: Text(
-          '早起的年轻人',
+          '我的页面',
           style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
         ),
       ),
