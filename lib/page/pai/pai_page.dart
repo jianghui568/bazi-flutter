@@ -1,4 +1,5 @@
 import 'package:bazi/extention/theme/extention_theme.dart';
+import 'package:bazi/http/api.dart';
 import 'package:bazi/util/date_help.dart';
 import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ class _PaiPageState extends State<PaiPage> {
                         });
                       },
                       // 按钮组的值
-                        groupValue: this._calendar,
+                      groupValue: this._calendar,
                     ),
                     SizedBox(
                       width: 20,
@@ -128,9 +129,8 @@ class _PaiPageState extends State<PaiPage> {
                           setState(() {
                             var numFormat = NumberFormat('00');
                             _birthday =
-                            '${p.year}-${numFormat.format(p.month)}-${numFormat.format(p.day)} ${numFormat.format(p.hour)}:${numFormat.format(p.minute)}';
+                                '${p.year}-${numFormat.format(p.month)}-${numFormat.format(p.day)} ${numFormat.format(p.hour)}:${numFormat.format(p.minute)}';
                           });
-
                         } else {
                           print('------------------> $p');
                         }
@@ -161,6 +161,15 @@ class _PaiPageState extends State<PaiPage> {
                       String email = _birthday;
 
                       // 处理提交逻辑...
+                      var postData = {
+                        'isSolarTime': false,
+                        'calendarType': _calendar,
+                        'birthday': _birthday,
+                        "gender": _gender
+                      };
+                      Api.destinyPredict(postData)
+                          .then((value) => {print(value)})
+                          .onError((error, stackTrace) => {print(error)});
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

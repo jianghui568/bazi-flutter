@@ -1,6 +1,6 @@
 class Config {
-  static const BASE_URL = 'http://localhost:7777';
+  static const String BASE_URL = 'http://127.0.0.1:7777';
 
   // 预测
-  static const String PREDICT = '/api/v1/predict';
+  static const String PREDICT = '/destiny/predict';
 }

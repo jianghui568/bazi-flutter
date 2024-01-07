@@ -67,7 +67,7 @@ class _IndexPageState extends State<IndexPage> {
 
   Widget _bottomIcon(path) {
     return SvgPicture.asset(
-      'assets/icons/settings.svg', // 替换为你的SVG文件路径
+      path,
       height: 24,
       width: 24,
     );

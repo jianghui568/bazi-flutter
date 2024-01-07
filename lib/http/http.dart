@@ -5,15 +5,21 @@ import 'package:dio/dio.dart';
 typedef RequestCallBack = void Function(Map data);
 
 class Http {
-  final Duration _timeout = 30 as Duration;
+  final _timeout = 30;
   late Dio _dio;
 
-  Http() {
-    _dio = Dio(BaseOptions(
+  Http._internal();
+
+  static late Http _instance;
+
+  factory Http() {
+    _instance = Http._internal();
+    _instance._dio = Dio(BaseOptions(
       baseUrl: Config.BASE_URL,
-      connectTimeout: 5 * 1000 as Duration,
-      receiveTimeout: _timeout * 1000,
+      connectTimeout: Duration(seconds: 5),
+      receiveTimeout: Duration(seconds: _instance._timeout),
     ));
+    return _instance;
   }
 
   Future<Response> get(String path, {Map<String, dynamic>? params}) async {
