@@ -1,9 +1,9 @@
 import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:bazi/extention/theme/theme.dart';
-import 'package:bazi/page/my/MyPage.dart';
-import 'package:bazi/page/pai/PaiPage.dart';
-import 'package:bazi/page/record/RecordPage.dart';
+import 'package:bazi/page/my/my_page.dart';
+import 'package:bazi/page/pai/pai_page.dart';
+import 'package:bazi/page/record/record_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
