@@ -1,5 +1,6 @@
 import 'package:bazi/extention/theme/extention_theme.dart';
 import 'package:bazi/http/api.dart';
+import 'package:bazi/page/pai/destiny_eight_page.dart';
 import 'package:bazi/util/date_help.dart';
 import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_pickers/pickers.dart';
 
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 class PaiPage extends StatefulWidget {
   @override
@@ -18,13 +20,14 @@ class PaiPage extends StatefulWidget {
 
 class _PaiPageState extends State<PaiPage> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final _nameController = TextEditingController(text:'测试1');
   var _gender = Gender.man.value;
   var _calendar = Calendar.solar.value;
   var _birthday = '1990-01-01 00:00';
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBarBuilder.build(context, '排盘'),
       body: Center(
@@ -157,25 +160,32 @@ class _PaiPageState extends State<PaiPage> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       // 表单验证通过，可以在此处处理提交逻辑
-                      String name = _nameController.text;
-                      String email = _birthday;
+                      String username = _nameController.text;
 
                       // 处理提交逻辑...
                       var postData = {
                         'isSolarTime': false,
                         'calendarType': _calendar,
                         'birthday': _birthday,
-                        "gender": _gender
+                        "gender": _gender,
+                        'username':username
                       };
-                      Api.destinyPredict(postData)
-                          .then((value) => {print(value)})
-                          .onError((error, stackTrace) => {print(error)});
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('提交成功：$name, $email'),
-                        ),
-                      );
+                      SmartDialog.showLoading(msg: '测算中....');
+                      Api.destinyPredict(postData)
+                          .then((value) => {
+                            Navigator.of(context).push(MaterialPageRoute(
+                            builder: (content){
+                            return DestinyEightPage(title: username,);
+                            }
+                            ))
+
+                          })
+
+                          .whenComplete(() => {
+                            SmartDialog.dismiss()
+                      });
+
                     }
                   },
                   child: Text('提交'),
