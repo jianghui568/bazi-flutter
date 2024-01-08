@@ -158,6 +158,7 @@ class _PaiPageState extends State<PaiPage> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
+                    SmartDialog.showToast('wo shi tan chuang');
                     if (_formKey.currentState?.validate() ?? false) {
                       // 表单验证通过，可以在此处处理提交逻辑
                       String username = _nameController.text;
