@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:bazi/http/config.dart';
+import 'package:bazi/model/result.dart';
 import 'dart:async';
 import 'package:dio/dio.dart';
 
@@ -25,6 +28,7 @@ class Http {
   Future<Response> get(String path, {Map<String, dynamic>? params}) async {
     try {
       final response = await _dio.get(path, queryParameters: params);
+      print(response);
       return response;
     } on DioException catch (e) {
       // Handle DioError here
@@ -32,13 +36,24 @@ class Http {
     }
   }
 
-  Future<Response> post(String path, {Map<String, dynamic>? data}) async {
+  Future<Result> post(String path, Function(dynamic) fromJson, {Map<String, dynamic>? data}) async {
+
     try {
       final response = await _dio.post(path, data: data);
-      return response;
+      final respData = response.data;
+      return Result.fromJson(respData, fromJson);
+
     } on DioException catch (e) {
       // Handle DioError here
-      throw e;
+      // throw e;
+      return Result.error(e.toString(),true);
     }
   }
+  // Future<Result> post(String path,  Function(dynamic) fromJson, {Map<String, dynamic>? data}) async {
+  //   _dio.post(path, data: data).then((value) {
+  //     return Result.fromJson(jsonDecode(value as String), fromJson);
+  //   }).catchError((err) {
+  //     return Future.value(Result.error(err.toString(), true));
+  //   });
+  // }
 }

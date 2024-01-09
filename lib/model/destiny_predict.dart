@@ -214,14 +214,14 @@ class DestinyPredict {
         shengXiao: json['shengXiao'],
         shengXiaoLiChun: json['shengXiaoLiChun'],
         shengXiaoExact: json['shengXiaoExact'],
-        jieQiCurrent: json['jieQiCurrent'],
-        jieQiCurrentDateTime: json['jieQiCurrentDateTime'],
+        jieQiCurrent: json['jieQiCurrent'] ??  "",
+        jieQiCurrentDateTime: json['jieQiCurrentDateTime'] ??"",
         jieQiPrev: json['jieQiPrev'],
         jieQiPrevDateTime: json['jieQiPrevDateTime'],
         jieQiNext: json['jieQiNext'],
         jieQiNextDateTime: json['jieQiNextDateTime'],
         gong: json['gong'],
         eightChar: EightChar.fromJson(json['eightChar']),
-        daYunList: json['daYunList']);
+        daYunList: List<DaYun>.from(json['daYunList']);
   }
 }

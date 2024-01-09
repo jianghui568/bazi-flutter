@@ -1,6 +1,7 @@
 import 'package:bazi/extention/theme/extention_theme.dart';
 import 'package:bazi/http/api.dart';
-import 'package:bazi/page/pai/destiny_eight_page.dart';
+import 'package:bazi/model/destiny_predict.dart';
+import 'package:bazi/page/pai/pai_tab_page.dart';
 import 'package:bazi/util/date_help.dart';
 import 'package:bazi/widget/AppBarBuilder.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,13 @@ class PaiPage extends StatefulWidget {
 
 class _PaiPageState extends State<PaiPage> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController(text:'测试1');
+  final _nameController = TextEditingController(text: '测试1');
   var _gender = Gender.man.value;
   var _calendar = Calendar.solar.value;
   var _birthday = '1990-01-01 00:00';
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBarBuilder.build(context, '排盘'),
       body: Center(
@@ -168,24 +168,24 @@ class _PaiPageState extends State<PaiPage> {
                         'calendarType': _calendar,
                         'birthday': _birthday,
                         "gender": _gender,
-                        'username':username
+                        'username': username
                       };
 
                       SmartDialog.showLoading(msg: '测算中....');
-                      Api.destinyPredict(postData)
-                          .then((value) => {
-                            Navigator.of(context).push(MaterialPageRoute(
-                            builder: (content){
-                            return DestinyEightPage(title: username,);
-                            }
-                            ))
-
-                          })
-
-                          .whenComplete(() => {
-                            SmartDialog.dismiss()
+                      Api.destinyPredict(postData).then((result) {
+                        SmartDialog.dismiss();
+                        if (!result.success()) {
+                          SmartDialog.showToast(result.message);
+                          return;
+                        }
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (content) {
+                          return PaiTabPage(
+                            title: username,
+                            destinyPredict: result.data,
+                          );
+                        }));
                       });
-
                     }
                   },
                   child: Text('提交'),

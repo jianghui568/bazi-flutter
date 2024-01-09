@@ -19,12 +19,12 @@ ThemeData appThemeData = ThemeData(
     ),
 
     titleLarge: TextStyle(
-      fontSize: 14,
+      fontSize: 20,
       fontWeight: FontWeight.bold,
       color: const Color(0xff707275),
     ),
     titleMedium: TextStyle(
-      fontSize: 12,
+      fontSize: 16,
       fontWeight: FontWeight.w500,
       color: const Color(0xff242524),
     ),

@@ -7,7 +7,7 @@ class AppBarBuilder{
     return AppBar(
       centerTitle: true,
       title:Text(title,
-        style: Theme.of(context).navBarTitleStyle,),
+        style: Theme.of(context).titleLargeStyle,),
       backgroundColor: backgroundColor == null ?  Theme.of(context).navBackgroundColor : backgroundColor,
     );
   }
