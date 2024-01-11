@@ -15,7 +15,7 @@ class _RecordPageState extends State<RecordPage> {
       body: Center(
         child: Text(
           '我是档案页面',
-          style: Theme.of(context).bodyStyle,
+          style: Theme.of(context).styleBodyLarge,
         ),
       ),
     );

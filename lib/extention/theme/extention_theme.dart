@@ -9,9 +9,16 @@ extension ThemeDataColorExtension on ThemeData {
 
 /// 用于重命名字体样式属性
 extension ThemeDataTextStyleExtension on ThemeData {
-  TextStyle get titleLargeStyle => textTheme.titleLarge!;
-  TextStyle get titleMediumStyle => textTheme.titleMedium!;
-  TextStyle get titleSmallStyle => textTheme.titleSmall!;
-  TextStyle get bodyStyle => textTheme.bodySmall!;
+  TextStyle get styleLarge => textTheme.displayLarge!;
+  TextStyle get styleMedium => textTheme.displayMedium!;
+  TextStyle get styleSmall => textTheme.displaySmall!;
+
+  TextStyle get styleTitleLarge => textTheme.titleLarge!;
+  TextStyle get styleTitleMedium => textTheme.titleMedium!;
+  TextStyle get styleTitleSmall => textTheme.titleSmall!;
+
+  TextStyle get styleBodySmall => textTheme.bodySmall!;
+  TextStyle get styleBodyMedium => textTheme.bodyMedium!;
+  TextStyle get styleBodyLarge => textTheme.bodyLarge!;
 }
 

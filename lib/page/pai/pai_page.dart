@@ -168,7 +168,7 @@ class _PaiPageState extends State<PaiPage> {
                         'calendarType': _calendar,
                         'birthday': _birthday,
                         "gender": _gender,
-                        'username': username
+                        'name': username
                       };
 
                       SmartDialog.showLoading(msg: '测算中....');

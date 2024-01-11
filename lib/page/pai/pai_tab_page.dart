@@ -8,14 +8,10 @@ import 'package:bazi/model/destiny_predict.dart';
 class _TabData {
   final Widget tab;
   final Widget body;
-
   _TabData({required this.tab, required this.body});
 }
 
-final _tabDataList = <_TabData>[
-  _TabData(tab: Text('基础信息'), body: BaseinfoPage(list: ["1", "2"])),
-  _TabData(tab: Text('八字命盘'), body: EightCharPage()),
-];
+
 
 class PaiTabPage extends StatefulWidget {
   String title;
@@ -33,11 +29,6 @@ class PaiTabPage extends StatefulWidget {
 
 class _PaiTabPageState extends State<PaiTabPage>
     with SingleTickerProviderStateMixin {
-  late TabController _controller;
-
-  final tabBarList = _tabDataList.map((item) => item.tab).toList();
-  final tabBarViewList = _tabDataList.map((item) => item.body).toList();
-
   String title;
   DestinyPredict destinyPredict;
   _PaiTabPageState({
@@ -47,7 +38,14 @@ class _PaiTabPageState extends State<PaiTabPage>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final _tabDataList = <_TabData>[
+      _TabData(tab: Text('基础信息'), body: BaseinfoPage(destinyPredict: this.destinyPredict)),
+      _TabData(tab: Text('八字命盘'), body: EightCharPage()),
+    ];
+
+    final tabBarList = _tabDataList.map((item) => item.tab).toList();
+    final tabBarViewList = _tabDataList.map((item) => item.body).toList();
+
     return DefaultTabController(
         length: tabBarList.length,
         child: Column(
@@ -73,7 +71,7 @@ class _PaiTabPageState extends State<PaiTabPage>
                   unselectedLabelColor: Colors.white,
                   unselectedLabelStyle: TextStyle(fontSize: 20),
                   labelColor: Colors.red,
-                  labelStyle: Theme.of(context).titleMediumStyle,
+                  labelStyle: Theme.of(context).styleTitleLarge,
                   tabs: tabBarList),
             ),
             Expanded(

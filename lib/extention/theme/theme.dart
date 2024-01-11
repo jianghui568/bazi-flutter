@@ -30,8 +30,9 @@ ThemeData appThemeData = ThemeData(
     ),
     titleSmall: TextStyle(
       fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: const Color(0xff707275),
+      fontWeight: FontWeight.bold,
+      color: const Color(0xff242524),
+
     ),
     bodyLarge: TextStyle(
       fontSize: 11,
@@ -43,6 +44,11 @@ ThemeData appThemeData = ThemeData(
       fontWeight: FontWeight.normal,
       color: const Color(0xff242524),
     ),
+    bodySmall: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: const Color(0xff242524),
+  ),
   ),
   colorScheme: const ColorScheme.light(
     primary: Colors.white,

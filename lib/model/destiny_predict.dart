@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'package:bazi/model/simple_model.dart';
 
 class EightChar {
   String yearGan;
@@ -82,15 +82,15 @@ class EightChar {
         dayDiShi: json['dayDiShi'],
         dayGanShiShen: json['dayGanShiShen'],
         dayZhi: json['dayZhi'],
-        dayZhiShiShen: json['dayZhiShiShen'],
-        dayHideGan: json['dayHideGan'],
+        dayZhiShiShen: List<String>.from(json['dayZhiShiShen']),
+        dayHideGan: List<String>.from(json['dayHideGan']),
         timeGan: json['timeGan'],
         timeNaYin: json['timeNaYin'],
         timeDiShi: json['timeDiShi'],
         timeGanShiShen: json['timeGanShiShen'],
         timeZhi: json['timeZhi'],
-        timeZhiShiShen: json['timeZhiShiShen'],
-        timeHideGan: json['timeHideGan']);
+        timeZhiShiShen: List<String>.from(json['timeZhiShiShen']),
+        timeHideGan: List<String>.from(json['timeHideGan']));
   }
 }
 
@@ -155,7 +155,8 @@ class DaYun {
         endAge: json['endAge'],
         solar: json['solar'],
         ganZhi: json['ganZhi'],
-        liuYearList: json['liuYearList']);
+        liuYearList: List<LiuYear>.from(
+            json['liuYearList'].map((json) => LiuYear.fromJson(json))));
   }
 
   Map<String, dynamic> toJson() {
@@ -172,6 +173,10 @@ class DaYun {
 }
 
 class DestinyPredict {
+  String xiu;
+  String name;
+  String xingZuo;
+  String gender;
   String lunar;
   String fullDescription;
   String solar;
@@ -189,6 +194,10 @@ class DestinyPredict {
   List<DaYun> daYunList;
 
   DestinyPredict({
+    required this.xiu,
+    required this.name,
+    required this.xingZuo,
+    required this.gender,
     required this.lunar,
     required this.fullDescription,
     required this.solar,
@@ -208,20 +217,43 @@ class DestinyPredict {
 
   factory DestinyPredict.fromJson(Map<String, dynamic> json) {
     return DestinyPredict(
+        xiu: json['xiu'],
+        name: json['name'],
+        xingZuo: json['xingZuo'],
+        gender: json['gender'],
         lunar: json['lunar'],
         fullDescription: json['fullDescription'],
         solar: json['solar'],
         shengXiao: json['shengXiao'],
         shengXiaoLiChun: json['shengXiaoLiChun'],
         shengXiaoExact: json['shengXiaoExact'],
-        jieQiCurrent: json['jieQiCurrent'] ??  "",
-        jieQiCurrentDateTime: json['jieQiCurrentDateTime'] ??"",
+        jieQiCurrent: json['jieQiCurrent'] ?? "",
+        jieQiCurrentDateTime: json['jieQiCurrentDateTime'] ?? "",
         jieQiPrev: json['jieQiPrev'],
         jieQiPrevDateTime: json['jieQiPrevDateTime'],
         jieQiNext: json['jieQiNext'],
         jieQiNextDateTime: json['jieQiNextDateTime'],
         gong: json['gong'],
         eightChar: EightChar.fromJson(json['eightChar']),
-        daYunList: List<DaYun>.from(json['daYunList']);
+        daYunList: List<DaYun>.from(
+            json['daYunList'].map((json) => DaYun.fromJson(json))));
+  }
+  List<SimpleModel> toBaseInfo() {
+    List<SimpleModel> listData = [];
+    // 初始化数据
+    listData.add(SimpleModel('姓名：', this.name));
+    listData.add(SimpleModel('性别：', this.gender));
+    listData.add(SimpleModel('公历：', this.solar));
+    listData.add(SimpleModel('农历：', this.lunar));
+    listData.add(SimpleModel('节气：', this.jieQiPrev + ' ' + this.jieQiPrevDateTime + '  ' + this.jieQiNext + ' ' + this.jieQiNextDateTime));
+    listData.add(SimpleModel('星座：', this.xingZuo));
+    listData.add(SimpleModel('二十八宿：', this.xiu));
+    listData.add(SimpleModel('本命星宿：', this.xingZuo));
+    listData.add(SimpleModel('值日星宿：', this.xingZuo));
+    listData.add(SimpleModel('空亡：', this.xingZuo));
+    listData.add(SimpleModel('命宫：', this.xingZuo));
+    listData.add(SimpleModel('身宫：', this.xingZuo));
+    listData.add(SimpleModel('胎元：', this.xingZuo));
+    return listData;
   }
 }
