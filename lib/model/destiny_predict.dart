@@ -1,4 +1,4 @@
-import 'package:bazi/model/simple_model.dart';
+import 'package:bazi/model/base_info_model.dart';
 
 class EightChar {
   String yearGan;
@@ -192,8 +192,10 @@ class DestinyPredict {
   String gong;
   EightChar eightChar;
   List<DaYun> daYunList;
+  List<BaseInfoModel> baseInfo;
 
   DestinyPredict({
+    required this.baseInfo,
     required this.xiu,
     required this.name,
     required this.xingZuo,
@@ -235,25 +237,11 @@ class DestinyPredict {
         jieQiNextDateTime: json['jieQiNextDateTime'],
         gong: json['gong'],
         eightChar: EightChar.fromJson(json['eightChar']),
+        baseInfo: List<BaseInfoModel>.from(
+            json['baseInfoList'].map((json) => BaseInfoModel.fromJson(json))),
         daYunList: List<DaYun>.from(
-            json['daYunList'].map((json) => DaYun.fromJson(json))));
-  }
-  List<SimpleModel> toBaseInfo() {
-    List<SimpleModel> listData = [];
-    // 初始化数据
-    listData.add(SimpleModel('姓名：', this.name));
-    listData.add(SimpleModel('性别：', this.gender));
-    listData.add(SimpleModel('公历：', this.solar));
-    listData.add(SimpleModel('农历：', this.lunar));
-    listData.add(SimpleModel('节气：', this.jieQiPrev + ' ' + this.jieQiPrevDateTime + '  ' + this.jieQiNext + ' ' + this.jieQiNextDateTime));
-    listData.add(SimpleModel('星座：', this.xingZuo));
-    listData.add(SimpleModel('二十八宿：', this.xiu));
-    listData.add(SimpleModel('本命星宿：', this.xingZuo));
-    listData.add(SimpleModel('值日星宿：', this.xingZuo));
-    listData.add(SimpleModel('空亡：', this.xingZuo));
-    listData.add(SimpleModel('命宫：', this.xingZuo));
-    listData.add(SimpleModel('身宫：', this.xingZuo));
-    listData.add(SimpleModel('胎元：', this.xingZuo));
-    return listData;
+            json['daYunList'].map((json) => DaYun.fromJson(json)))
+    );
+
   }
 }
