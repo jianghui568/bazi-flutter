@@ -2,7 +2,7 @@ import 'package:bazi/extention/theme/extention_theme.dart';
 import 'package:bazi/model/destiny_predict.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:r_dotted_line_border/r_dotted_line_border.dart';
+
 
 class EightCharPage extends StatefulWidget {
   DestinyPredict destinyPredict;
@@ -38,59 +38,61 @@ class _EightCharPageState extends State<EightCharPage>
   buildHeader(BuildContext context) {
     final double rowTextGap = 10.0;
 
-    return Row(
+    return Padding(padding: EdgeInsets.only(top: 6),
+    child: Row(
       children: [
         SizedBox(width: rowTextGap), // 添加一些间距
         Container(
-          width: 80.0,
-          height: 80.0,
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(5),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                  'https://img1.baidu.com/11it/u=1238791605,3480162438&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800'), // 替换为实际的头像链接
-            ),
-          ),
+            width: 70.0,
+            height: 70.0,
+            child: SvgPicture.asset(
+                'images/default-avatar.svg'
+            )
+
         ),
         SizedBox(width: rowTextGap), // 添加一些间距
 
         // 右侧文本
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
               // 第一行文本
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: rowTextGap),
+                  Expanded(
+
+                      child: Row(
+                        children: [
+
+                          Text(
+                            '姓名：',
+                            style: Theme.of(context).styleTitleSmall,
+                          ),
+                          Text(
+                            this.destinyPredict.name,
+                            style: Theme.of(context).styleBodySmall,
+                          ),
+                        ],
+                      )),
                   Expanded(
                       child: Row(
-                    children: [
-                      Text(
-                        '标题1',
-                        style: Theme.of(context).styleTitleSmall,
-                      ),
-                      Text(
-                        '标题1文本',
-                        style: Theme.of(context).styleBodySmall,
-                      ),
-                    ],
-                  )),
-                  Expanded(
-                      child: Row(
-                    children: [
-                      Text(
-                        '标题1',
-                        style: Theme.of(context).styleTitleSmall,
-                      ),
-                      Text(
-                        '标题1文本',
-                        style: Theme.of(context).styleBodySmall,
-                      ),
-                    ],
-                  ))
+                        children: [
+                          Text(
+                            '性别：',
+                            style: Theme.of(context).styleTitleSmall,
+
+                          ),
+                          Text(
+                            this.destinyPredict.gender,
+                            style: Theme.of(context).styleBodySmall,
+                          ),
+                        ],
+                      ))
                 ],
               ),
 
@@ -101,11 +103,11 @@ class _EightCharPageState extends State<EightCharPage>
               Row(
                 children: [
                   Text(
-                    '标题2',
+                    '阳历：',
                     style: Theme.of(context).styleTitleSmall,
                   ),
                   Text(
-                    '内容2',
+                    this.destinyPredict.solar,
                     style: Theme.of(context).styleBodySmall,
                   ),
                 ],
@@ -118,11 +120,11 @@ class _EightCharPageState extends State<EightCharPage>
               Row(
                 children: [
                   Text(
-                    '标题3',
+                    '阴历：',
                     style: Theme.of(context).styleTitleSmall,
                   ),
                   Text(
-                    '内容3',
+                    this.destinyPredict.lunar,
                     style: Theme.of(context).styleBodySmall,
                   ),
                 ],
@@ -132,7 +134,7 @@ class _EightCharPageState extends State<EightCharPage>
           ),
         ),
       ],
-    );
+    ),);
   }
 
   buildBaZi(BuildContext context) {
@@ -157,17 +159,17 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildSiZhu(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'sizhu'),
-      buildItem(context, 'nian'),
-      buildItem(context, 'yue'),
-      buildItem(context, 'ri'),
-      buildItem(context, 'shi')
+      buildItem(context, '四柱'),
+      buildItem(context, '年柱'),
+      buildItem(context, '月柱'),
+      buildItem(context, '日柱'),
+      buildItem(context, '时柱')
     ]);
   }
 
   buildShiShen(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'shishen'),
+      buildItem(context, '主星'),
       buildItem(context, this.destinyPredict.eightChar.yearGanShiShen),
       buildItem(context, this.destinyPredict.eightChar.monthGanShiShen),
       buildItem(context, this.destinyPredict.eightChar.dayGanShiShen),
@@ -178,7 +180,7 @@ class _EightCharPageState extends State<EightCharPage>
   buildGan(BuildContext context) {
     TextStyle style = Theme.of(context).styleSiZhu;
     return TableRow(children: [
-      buildItem(context, 'tiangan'),
+      buildItem(context, '天干'),
       buildItem(context, this.destinyPredict.eightChar.yearGan, style: style),
       buildItem(context, this.destinyPredict.eightChar.monthGan, style: style),
       buildItem(context, this.destinyPredict.eightChar.dayGan, style: style),
@@ -189,7 +191,7 @@ class _EightCharPageState extends State<EightCharPage>
   buildZhi(BuildContext context) {
     TextStyle style = Theme.of(context).styleSiZhu;
     return TableRow(children: [
-      buildItem(context, 'dizhi'),
+      buildItem(context, '地支'),
       buildItem(context, this.destinyPredict.eightChar.yearZhi, style: style),
       buildItem(context, this.destinyPredict.eightChar.monthZhi, style: style),
       buildItem(context, this.destinyPredict.eightChar.dayZhi, style: style),
@@ -199,7 +201,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildCangGan(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'canggan'),
+      buildItem(context, '藏干'),
       buildItem(context, this.destinyPredict.eightChar.yearHideGan.join('   ')),
       buildItem(
           context, this.destinyPredict.eightChar.monthHideGan.join('   ')),
@@ -210,7 +212,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildCangGanShiShen(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'fuxing'),
+      buildItem(context, '副星'),
       buildItem(context, this.destinyPredict.eightChar.yearZhiShiShen.join('')),
       buildItem(
           context, this.destinyPredict.eightChar.monthZhiShiShen.join('')),
@@ -221,7 +223,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildNaYin(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'nayin'),
+      buildItem(context, '纳音'),
       buildItem(context, this.destinyPredict.eightChar.yearNaYin),
       buildItem(context, this.destinyPredict.eightChar.monthNaYin),
       buildItem(context, this.destinyPredict.eightChar.dayNaYin),
@@ -231,7 +233,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildXingYun(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'xingyun'),
+      buildItem(context, '星运'),
       buildItem(context, this.destinyPredict.eightChar.yearNaYin),
       buildItem(context, this.destinyPredict.eightChar.monthNaYin),
       buildItem(context, this.destinyPredict.eightChar.dayNaYin),
@@ -241,7 +243,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildXunKong(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'kongwang'),
+      buildItem(context, '空亡'),
       buildItem(context, this.destinyPredict.xunKongYear),
       buildItem(context, this.destinyPredict.xunKongMonth),
       buildItem(context, this.destinyPredict.xunKongDay),
@@ -251,7 +253,7 @@ class _EightCharPageState extends State<EightCharPage>
 
   buildShenSha(BuildContext context) {
     return TableRow(children: [
-      buildItem(context, 'shensha'),
+      buildItem(context, '神煞'),
       buildItem(context, this.destinyPredict.xunKongMonth),
       buildItem(context, this.destinyPredict.xunKongMonth),
       buildItem(context, this.destinyPredict.xunKongDay),

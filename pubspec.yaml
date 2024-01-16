@@ -61,5 +61,5 @@ flutter:
 
   assets:
     - images/bottom/pai.svg
-    -
     - images/arrow-right.svg
+    - images/default-avatar.svg
