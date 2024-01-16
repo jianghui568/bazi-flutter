@@ -7,6 +7,11 @@ ThemeData appThemeData = ThemeData(
   highlightColor: const Color(0xffa7d500),
   shadowColor: const Color(0xffa0a4a7),
   textTheme: TextTheme(
+    headlineMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.normal,
+      color: Color.fromARGB(255, 214, 212, 78),
+    ),
     displayLarge: TextStyle(
       fontSize: 17,
       fontWeight: FontWeight.bold,
@@ -17,7 +22,6 @@ ThemeData appThemeData = ThemeData(
       fontWeight: FontWeight.bold,
       color: const Color(0xff242524),
     ),
-
     titleLarge: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
@@ -32,7 +36,6 @@ ThemeData appThemeData = ThemeData(
       fontSize: 12,
       fontWeight: FontWeight.bold,
       color: const Color(0xff242524),
-
     ),
     bodyLarge: TextStyle(
       fontSize: 11,
@@ -45,10 +48,10 @@ ThemeData appThemeData = ThemeData(
       color: const Color(0xff242524),
     ),
     bodySmall: TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.normal,
-    color: const Color(0xff242524),
-  ),
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      color: const Color(0xff242524),
+    ),
   ),
   colorScheme: const ColorScheme.light(
     primary: Colors.white,
@@ -59,6 +62,7 @@ ThemeData appThemeData = ThemeData(
     onError: Colors.white,
     onBackground: Color(0xffe2e5e7),
     onSecondary: Color(0xff707275),
-  ).copyWith(background: const Color(0xfff3f4f5)).copyWith(
-      error: const Color(0xffe21a1a)),
+  )
+      .copyWith(background: const Color(0xfff3f4f5))
+      .copyWith(error: const Color(0xffe21a1a)),
 );

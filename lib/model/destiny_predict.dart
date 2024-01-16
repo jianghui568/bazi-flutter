@@ -190,11 +190,19 @@ class DestinyPredict {
   String jieQiNext;
   String jieQiNextDateTime;
   String gong;
+  String xunKongYear;
+  String xunKongMonth;
+  String xunKongDay;
+  String xunKongHour;
   EightChar eightChar;
   List<DaYun> daYunList;
   List<BaseInfoModel> baseInfo;
 
   DestinyPredict({
+    required this.xunKongYear,
+    required this.xunKongMonth,
+    required this.xunKongDay,
+    required this.xunKongHour,
     required this.baseInfo,
     required this.xiu,
     required this.name,
@@ -219,6 +227,10 @@ class DestinyPredict {
 
   factory DestinyPredict.fromJson(Map<String, dynamic> json) {
     return DestinyPredict(
+        xunKongYear: json['xunKongYear'],
+        xunKongMonth: json['xunKongMonth'],
+        xunKongDay: json['xunKongDay'],
+        xunKongHour: json['xunKongHour'],
         xiu: json['xiu'],
         name: json['name'],
         xingZuo: json['xingZuo'],
@@ -240,8 +252,6 @@ class DestinyPredict {
         baseInfo: List<BaseInfoModel>.from(
             json['baseInfoList'].map((json) => BaseInfoModel.fromJson(json))),
         daYunList: List<DaYun>.from(
-            json['daYunList'].map((json) => DaYun.fromJson(json)))
-    );
-
+            json['daYunList'].map((json) => DaYun.fromJson(json))));
   }
 }

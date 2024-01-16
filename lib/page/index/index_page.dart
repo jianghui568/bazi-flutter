@@ -14,15 +14,15 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   final _bottomDataList = [
     {
-      'title': '排盘',
+      'title': '11',
       'icon': 'images/bottom/pai.svg',
     },
     {
-      'title': '档案',
+      'title': '22',
       'icon': 'images/bottom/pai.svg',
     },
     {
-      'title': '我的',
+      'title': '33',
       'icon': 'images/bottom/pai.svg',
     },
   ];

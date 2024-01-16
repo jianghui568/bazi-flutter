@@ -29,7 +29,7 @@ class _PaiPageState extends State<PaiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder.build(context, '排盘'),
+      appBar: AppBarBuilder.build(context, '11'),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -158,7 +158,6 @@ class _PaiPageState extends State<PaiPage> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    SmartDialog.showToast('wo shi tan chuang');
                     if (_formKey.currentState?.validate() ?? false) {
                       // 表单验证通过，可以在此处处理提交逻辑
                       String username = _nameController.text;

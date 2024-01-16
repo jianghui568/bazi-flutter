@@ -11,36 +11,32 @@ class _TabData {
   _TabData({required this.tab, required this.body});
 }
 
-
-
 class PaiTabPage extends StatefulWidget {
   String title;
   DestinyPredict destinyPredict;
 
-  PaiTabPage({
-    required this.title,
-    required this.destinyPredict
-  });
+  PaiTabPage({required this.title, required this.destinyPredict});
 
   @override
   _PaiTabPageState createState() =>
-      _PaiTabPageState(title: this.title,destinyPredict: this.destinyPredict);
+      _PaiTabPageState(title: this.title, destinyPredict: this.destinyPredict);
 }
 
 class _PaiTabPageState extends State<PaiTabPage>
     with SingleTickerProviderStateMixin {
   String title;
   DestinyPredict destinyPredict;
-  _PaiTabPageState({
-    required this.title,
-    required this.destinyPredict
-  });
+  _PaiTabPageState({required this.title, required this.destinyPredict});
 
   @override
   Widget build(BuildContext context) {
     final _tabDataList = <_TabData>[
-      _TabData(tab: Text('基础信息'), body: BaseinfoPage(destinyPredict: this.destinyPredict)),
-      _TabData(tab: Text('八字命盘'), body: EightCharPage()),
+      _TabData(
+          tab: Text('11'),
+          body: BaseinfoPage(destinyPredict: this.destinyPredict)),
+      _TabData(
+          tab: Text('22'),
+          body: EightCharPage(destinyPredict: this.destinyPredict)),
     ];
 
     final tabBarList = _tabDataList.map((item) => item.tab).toList();
@@ -66,11 +62,11 @@ class _PaiTabPageState extends State<PaiTabPage>
                       ),
                     ),
                   ),
-                  indicatorColor: Colors.red,
+                  indicatorColor: Colors.white,
                   indicatorSize: TabBarIndicatorSize.label,
                   unselectedLabelColor: Colors.white,
                   unselectedLabelStyle: TextStyle(fontSize: 20),
-                  labelColor: Colors.red,
+                  labelColor: Colors.white,
                   labelStyle: Theme.of(context).styleTitleLarge,
                   tabs: tabBarList),
             ),
