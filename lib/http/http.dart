@@ -36,17 +36,16 @@ class Http {
     }
   }
 
-  Future<Result> post(String path, Function(dynamic) fromJson, {Map<String, dynamic>? data}) async {
-
+  Future<Result> post(String path, Function(dynamic) fromJson,
+      {Map<String, dynamic>? data}) async {
     try {
       final response = await _dio.post(path, data: data);
       final respData = response.data;
       return Result.fromJson(respData, fromJson);
-
     } on DioException catch (e) {
       // Handle DioError here
       // throw e;
-      return Result.error(e.toString(),true);
+      return Result.error(e.toString(), true);
     }
   }
   // Future<Result> post(String path,  Function(dynamic) fromJson, {Map<String, dynamic>? data}) async {

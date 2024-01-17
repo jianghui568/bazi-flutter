@@ -1,4 +1,4 @@
-import 'package:bazi/model/base_info_model.dart';
+import 'package:bazi/model/destiny/destiny_base_info_item.dart';
 import 'package:bazi/model/destiny_predict.dart';
 import 'package:bazi/widget/label.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +17,14 @@ class _BaseinfoPageState extends State<BaseinfoPage>
     with AutomaticKeepAliveClientMixin {
   DestinyPredict destinyPredict;
 
-  List<BaseInfoModel> listData = [];
+  List<DestinyBaseInfoItem> listData = [];
 
-  _BaseinfoPageState({required  this.destinyPredict});
+  _BaseinfoPageState({required this.destinyPredict});
 
   @override
   void initState() {
     super.initState();
-    listData = this.destinyPredict.baseInfo;
+    listData = this.destinyPredict.baseInfo.infoList;
   }
 
   @override
@@ -33,13 +33,14 @@ class _BaseinfoPageState extends State<BaseinfoPage>
         body: ListView.builder(
             itemCount: this.listData.length,
             itemBuilder: (build, index) {
-              BaseInfoModel baseInfo = this.listData[index];
+              DestinyBaseInfoItem baseInfo = this.listData[index];
               return Container(
-                  padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
+                  padding:
+                      EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
                   child: Label(
-                title: baseInfo.title,
-                subTitle: baseInfo.subTitle,
-              ));
+                    title: baseInfo.title,
+                    subTitle: baseInfo.content,
+                  ));
             }));
   }
 
